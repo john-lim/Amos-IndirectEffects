@@ -89,25 +89,24 @@ Public Class CustomCode
             debug.PrintX("<td>" + MatrixElement(tableBootstrap, i, 4).ToString("#0.000")) 'Lower
             debug.PrintX("<td>" + MatrixElement(tableBootstrap, i, 5).ToString("#0.000")) 'Upper
             debug.PrintX("<td>" + MatrixElement(tableBootstrap, i, 6).ToString("#0.000")) 'P-Value
-            debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000")) 'Standardized indirect effect
 
-            'Output the significance of the standardized estimate
+            'Output the significance significance with the standardized estimate
             If MatrixName(tableBootstrap, i, 6) = "***" Then
-                debug.PrintX("***</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "***</td>")
             ElseIf MatrixName(tableBootstrap, i, 6) = "" Then
-                debug.PrintX("</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "</td>")
             ElseIf MatrixElement(tableBootstrap, i, 6) = 0 Then
-                debug.PrintX("</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "</td>")
             ElseIf MatrixElement(tableBootstrap, i, 6) < 0.001 Then
-                debug.PrintX("***</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "***</td>")
             ElseIf MatrixElement(tableBootstrap, i, 6) < 0.01 Then
-                debug.PrintX("**</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "**</td>")
             ElseIf MatrixElement(tableBootstrap, i, 6) < 0.05 Then
-                debug.PrintX("*</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "*</td>")
             ElseIf MatrixElement(tableBootstrap, i, 6) < 0.1 Then
-                debug.PrintX("&#x271D;</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "&#x271D;</td>")
             Else
-                debug.PrintX("</td>")
+                debug.PrintX("<td>" + standardizedIndirectEffects(i - 1).ToString("#0.000") + "</td>")
             End If
 
             debug.PrintX("</tr>")
@@ -192,15 +191,8 @@ Public Class CustomCode
         'Set paths back to null.
         For Each variable As PDElement In pd.PDElements 'Iterate through the paths in the model
             If variable.IsPath Then
-                If Not (variable.Variable1.IsUnobservedVariable And Not variable.Variable1.IsLatentVariable) Then 'Check if path is connected to error term.
-                    Try
-                        If variable.Value1 = 1 Then 'Do not change the names of paths with value of 1
-                            variable.Value1 = 1
-                        End If
-                    Catch ex As Exception
-                        variable.Value1 = "" 'Clear path name.
-                        Continue For
-                    End Try
+                If (variable.Variable1.IsLatentVariable And variable.Variable2.IsLatentVariable) Or (variable.Variable1.IsObservedVariable And variable.Variable2.IsObservedVariable) Then
+                    variable.Value1 = variable.Variable1.NameOrCaption + "_" + variable.Variable2.NameOrCaption 'Change path to names of the connected variables.
                 End If
             End If
         Next
@@ -210,15 +202,8 @@ Public Class CustomCode
     Sub NamePaths()
         For Each variable As PDElement In pd.PDElements 'Iterate through the paths in the model
             If variable.IsPath Then
-                If Not (variable.Variable1.IsUnobservedVariable And Not variable.Variable1.IsLatentVariable) Then 'Check if path is connected to error term.
-                    Try
-                        If variable.Value1 = 1 Then 'Do not change the names of paths with value of 1
-                            variable.Value1 = 1
-                        End If
-                    Catch ex As Exception
-                        variable.Value1 = variable.Variable1.NameOrCaption + "_" + variable.Variable2.NameOrCaption 'Change path to names of the connected variables.
-                        Continue For
-                    End Try
+                If (variable.Variable1.IsLatentVariable And variable.Variable2.IsLatentVariable) Or (variable.Variable1.IsObservedVariable And variable.Variable2.IsObservedVariable) Then
+                    variable.Value1 = variable.Variable1.NameOrCaption + "_" + variable.Variable2.NameOrCaption 'Change path to names of the connected variables.
                 End If
             End If
         Next

@@ -2,3 +2,7 @@ C:\Users\johnh\AppData\Local\AmosDevelopment\Amos\25\Plugins\Amos-IndirectEffect
 C:\Users\johnh\AppData\Local\AmosDevelopment\Amos\25\Plugins\Amos-IndirectEffects.pdb
 C:\Users\johnh\Amos\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.dll
 C:\Users\johnh\Amos\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.pdb
+C:\Users\johnh\Desktop\Research\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.dll
+C:\Users\johnh\Desktop\Research\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.pdb
+C:\Users\johnh\Desktop\Research\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.vbprojResolveAssemblyReference.cache
+C:\Users\johnh\Desktop\Research\Amos-IndirectEffects\Amos-IndirectEffects\obj\Debug\Amos-IndirectEffects.vbproj.CoreCompileInputs.cache

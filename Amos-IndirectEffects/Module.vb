@@ -26,6 +26,7 @@ Public Class CustomCode
         NamePaths()
 
         'Settings to get bootstrap estimates.
+        pd.GetCheckBox("AnalysisPropertiesForm", "StandardizedCheck").Checked = True
         pd.GetCheckBox("AnalysisPropertiesForm", "DoBootstrapCheck").Checked = True
         pd.GetTextBox("AnalysisPropertiesForm", "BootstrapText").Text = "2000"
         pd.GetCheckBox("AnalysisPropertiesForm", "ConfidenceBCCheck").Checked = True
